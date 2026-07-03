@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>档案管理系统</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <h1 class="logo">📁 档案管理系统</h1>
+      <button class="btn btn-primary" id="btnNew">＋ 新建档案</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Search & Filter bar -->
+    <section class="toolbar">
+      <input
+        class="search-input"
+        type="text"
+        id="searchInput"
+        placeholder="搜索档案（标题、描述、负责人）…"
+      />
+      <select class="filter-select" id="categoryFilter">
+        <option value="">全部分类</option>
+      </select>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats" id="stats">
+      <span id="statsText">共 0 条档案</span>
+    </section>
+
+    <!-- Archive list -->
+    <section class="archive-list" id="archiveList">
+      <div class="empty-state" id="emptyState">
+        <p>暂无档案，点击右上角「新建档案」开始添加。</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">新建档案</h2>
+        <button class="modal-close" id="modalClose" aria-label="关闭">✕</button>
+      </div>
+      <form class="modal-form" id="archiveForm" novalidate>
+        <input type="hidden" id="archiveId" />
+        <div class="form-group">
+          <label for="fieldTitle">标题 <span class="required">*</span></label>
+          <input type="text" id="fieldTitle" placeholder="请输入档案标题" required />
+          <span class="field-error" id="errTitle"></span>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fieldCategory">分类 <span class="required">*</span></label>
+            <input type="text" id="fieldCategory" placeholder="例如：人事、财务、技术" list="categorySuggestions" required />
+            <datalist id="categorySuggestions"></datalist>
+            <span class="field-error" id="errCategory"></span>
+          </div>
+          <div class="form-group">
+            <label for="fieldDate">日期 <span class="required">*</span></label>
+            <input type="date" id="fieldDate" required />
+            <span class="field-error" id="errDate"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="fieldAuthor">负责人 <span class="required">*</span></label>
+          <input type="text" id="fieldAuthor" placeholder="请输入负责人姓名" required />
+          <span class="field-error" id="errAuthor"></span>
+        </div>
+        <div class="form-group">
+          <label for="fieldDescription">描述</label>
+          <textarea id="fieldDescription" rows="4" placeholder="可选，填写档案描述或备注"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="btnCancel">取消</button>
+          <button type="submit" class="btn btn-primary" id="btnSubmit">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete confirm dialog -->
+  <div class="modal-backdrop" id="confirmDialog" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2 class="modal-title" id="confirmTitle">确认删除</h2>
+      </div>
+      <p class="confirm-text">确定要删除该档案吗？此操作不可撤销。</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="btnConfirmCancel">取消</button>
+        <button class="btn btn-danger" id="btnConfirmDelete">删除</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
