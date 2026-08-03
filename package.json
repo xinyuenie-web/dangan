@@ -1,0 +1,17 @@
+{
+  "name": "dangan",
+  "version": "1.0.0",
+  "description": "档案管理系统 - Archive Management System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node test.js"
+  },
+  "keywords": ["archive", "records", "management", "档案"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
